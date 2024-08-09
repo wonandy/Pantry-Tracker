@@ -1,7 +1,10 @@
-import { Box, Stack, Typography, Button, Modal, TextField } from '@mui/material'
-import { firestore } from '@/firebase'
-import { collection, query, getDocs } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
+// 'use client'; should be the first line
+'use client';
+
+import { Box, Stack, Typography, Button, Modal, TextField } from '@mui/material';
+import { firestore } from '@/firebase';
+import { collection, query, getDocs } from 'firebase/firestore';
+//import { useEffect, useState } from 'react';
 
 const style = {
   position: 'absolute',
@@ -16,26 +19,26 @@ const style = {
 };
 
 export default function Home() {
-  const [pantry, setPantry] = useState([])
-  const [open, setOpen] = useState(false)
-  const [itemName, setItemName] = useState('')
+  const [pantry, setPantry] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [itemName, setItemName] = useState('');
 
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const updatePantry = async () => {
-      const snapshot = query(collection(firestore, 'pantry'))
-      const docs = await getDocs(snapshot)
-      const pantryList = []
+      const snapshot = query(collection(firestore, 'pantry'));
+      const docs = await getDocs(snapshot);
+      const pantryList = [];
       docs.forEach((doc) => {
-        pantryList.push(doc.id)
-      })
-      console.log(pantryList)
-      setPantry(pantryList)
-    }
-    updatePantry()
-  }, [])
+        pantryList.push(doc.id);
+      });
+      console.log(pantryList);
+      setPantry(pantryList);
+    };
+    updatePantry();
+  }, []);
 
   return (
     <Box
@@ -112,5 +115,5 @@ export default function Home() {
         </Stack>
       </Box>
     </Box>
-  )
+  );
 }
